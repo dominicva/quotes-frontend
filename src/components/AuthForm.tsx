@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import {
   Box,
@@ -23,6 +24,8 @@ type AuthErrors = {
 };
 
 const AuthForm = ({ action }: { action: AuthAction }) => {
+  const navigate = useNavigate();
+
   const [authAction, setAuthAction] = useState(action);
   const toggleAuthAction = () => {
     setAuthAction(authAction === 'login' ? 'signup' : 'login');
@@ -47,6 +50,7 @@ const AuthForm = ({ action }: { action: AuthAction }) => {
     try {
       await registerUser({ username, password, action: authAction });
       setErrors({});
+      navigate('/dashboard');
     } catch (e) {
       console.log(e);
       setErrors(e);
