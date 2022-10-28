@@ -1,9 +1,18 @@
-import Signup from './Signup';
+import { Routes, Route } from 'react-router-dom';
+import Signup from './components/Signup';
+import Login from './components/Login';
+import Dashboard from './components/Dashboard';
 
 function App() {
   return (
     <div className="App">
-      <Signup />
+      <h1>Quotes App</h1>
+
+      <Routes>
+        <Route index element={<Signup />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/dashboard" element={<Dashboard />} />
+      </Routes>
     </div>
   );
 }

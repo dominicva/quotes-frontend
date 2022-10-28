@@ -1,16 +1,18 @@
-import { MouseEventHandler, useState } from 'react';
-import postUser from './modules/postUser';
+import { useState, MouseEventHandler } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+import registerUser from '../modules/registerUser';
 
 type CustomError = { type: string; value: ''; msg: string; field?: string };
 
-type SignupErrors = {
+type AuthErrors = {
   error?: CustomError & CustomError[];
 };
 
-const Signup = () => {
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [errors, setErrors] = useState({} as SignupErrors);
+  const [errors, setErrors] = useState({} as AuthErrors);
+  const navigate = useNavigate();
 
   const singleError = errors.error && !Array.isArray(errors.error);
   const multipleErrors = errors.error && Array.isArray(errors.error);
@@ -20,7 +22,8 @@ const Signup = () => {
     e.preventDefault();
 
     try {
-      await postUser({ username, password });
+      await registerUser({ username, password, action: 'login' });
+      navigate('/dashboard', { replace: true });
       setErrors({});
     } catch (e) {
       console.log(e);
@@ -42,7 +45,7 @@ const Signup = () => {
 
   return (
     <div>
-      <h1>Signup</h1>
+      <h1>Login</h1>
       <form>
         <div className="column">
           <label htmlFor="username">Username</label>
@@ -71,10 +74,10 @@ const Signup = () => {
         {isError ? errorsElement : null}
       </form>
       <p>
-        Already have an account? <a href="/login">Login</a>
+        Don't have an account? <Link to="/">Sign up</Link>
       </p>
     </div>
   );
 };
 
-export default Signup;
+export default Login;
