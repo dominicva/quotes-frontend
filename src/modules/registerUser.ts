@@ -1,5 +1,7 @@
 const BASE_URL = 'http://localhost:3001';
 
+export type AuthAction = 'signup' | 'login';
+
 const registerUser = async ({
   username,
   password,
@@ -7,7 +9,7 @@ const registerUser = async ({
 }: {
   username: string;
   password: string;
-  action: 'signup' | 'login';
+  action: AuthAction;
 }) => {
   const response = await fetch(`${BASE_URL}/${action}`, {
     method: 'POST',

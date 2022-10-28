@@ -2,7 +2,7 @@
 current frontrunner for best practice box-sizing
 https://css-tricks.com/box-sizing/
 */
-html {
+/* html {
   box-sizing: border-box;
 }
 
@@ -53,4 +53,4 @@ button {
 
 form > .column {
   margin-bottom: 24px;
-}
+} */
